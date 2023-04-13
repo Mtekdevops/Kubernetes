@@ -1,24 +1,17 @@
-Taken From Kalyan Reddy's course on Udemy, Again I feel like its more important to be able to learn and understand an existing codebase 
-and then adapt that to your needs.  
+Taken From Kalyan Reddy's course on Udemy, I feel like its more important to be able to learn and understand an existing codebase 
+and then adapt that to your needs rather than trying to write from scratch. 
 
 I have updated the versions and made some changes/improvements like
 
-* First remove the provisioner on the bastion host that copies the SSH private key onto the box 
+* removing the provisioner on the bastion host that copies the SSH private key onto the box 
 (an unnecessary security risk given you can just use the 'ssh -J' flag to get the same result)
 
 * adding permissions to the node groups instance profile to allow the use of SSM-Agent that is already present on the Nodes AMI
-  (this gives multiple benefits including Bastion-less connection to private subnet nodes with no SSH keys to manage)
+  (this gives multiple benefits including Bastion/VPN-less SSHlike connection to private subnet nodes with no SSH keys to manage)
 
 # [Terraform on AWS EKS Kubernetes IaC SRE- 50 Real-World Demos](https://links.stacksimplify.com/terraform-on-aws-eks-kubernetes-iac-sre)
 
-## Course Modules
-01. Infrastructure as Code (IaC)
-02. Terraform Install Tools, Command and Language Basics
-03. Terraform Settings, Providers and Resources
-04. Terraform Input Variables, Output Values, Datasources
-05. Terraform Loops, MetaArguments, Splat Operator and Functions
-06. AWS VPC 3-Tier Architecture Design using Terraform
-07. Bastion Host AWS EC2 Instances, Security Groups, TF Provisioners with Terraform 
+## Course Modules 
 08. AWS EKS Cluster, Public and Private Node Groups using Terraform
 09. Kubernetes Fundamentals
 10. Kubernetes Deployment and Service using YAML
@@ -139,8 +132,6 @@ I have updated the versions and made some changes/improvements like
 
 ## What will students learn in your course?
 - You will learn to master Terraform & Kubernetes on AWS EKS in a Real-world perspective with 55 demo's on AWS Cloud with 25+ Kubernetes and 25+ Terraform Concepts
-- You will learn Terraform Basics for 4.5 hours
-- You will build a AWS VPC 3-Tier network with Terraform
 - You will build a AWS EKS Cluster with Public and Private Node Groups with Terraform
 - You will learn Kubernetes Fundamentals for 3 hours
 - You will implement a simple kubernetes deployment and service using Terraform Kubernetes Provider
