@@ -1,0 +1,12 @@
+grafana:
+  adminPassword: meme123!
+  service:
+    portName: http-web
+    type: NodePort
+    nodePort: 30008
+
+prometheus:
+  service:
+    portName: prom-web
+    type: NodePort
+    nodePort: 30090
