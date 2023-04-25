@@ -1,3 +1,4 @@
+
 # Create AWS EKS Cluster
 resource "aws_eks_cluster" "eks_cluster" {
   name     = "${local.name}-${var.cluster_name}"
@@ -7,8 +8,9 @@ resource "aws_eks_cluster" "eks_cluster" {
   vpc_config {
     subnet_ids = module.vpc.public_subnets
     endpoint_private_access = var.cluster_endpoint_private_access
+    #checkov:skip=CKV_AWS_39:public access restricted to a single ip is ok for testing, change for prod 
     endpoint_public_access  = var.cluster_endpoint_public_access
-    public_access_cidrs     = var.cluster_endpoint_public_access_cidrs    
+    public_access_cidrs     = local.single-workstation-external-cidr    
   }
 
   kubernetes_network_config {
@@ -24,4 +26,8 @@ resource "aws_eks_cluster" "eks_cluster" {
     aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.eks-AmazonEKSVPCResourceController,
   ]
+  encryption_config {
+    resources = ["secrets"]
+  }
 }
+

@@ -27,32 +27,10 @@ resource "aws_dynamodb_table" "tabledev" {
     }
 
   billing_mode = "PAY_PER_REQUEST"
+  point_in_time_recovery {
+    enabled = true
+  }
 }
-
-# resource "aws_dynamodb_table" "tablestag" {
-#   name     = "tflockDDB-mtekdevops-stag"
-#   hash_key = "LockID"
-#   attribute {
-#       name = "LockID"
-#       type = "S"
-#     }
-
-#   billing_mode = "PAY_PER_REQUEST"
-# }
-
-# resource "aws_ssm_parameter" "bucket_id" {
-#   name  = "/terraform/bucket_id"
-#   type  = "String"
-#   value = aws_s3_bucket.tfbucket.id
-# }
-
-# resource "aws_ssm_parameter" "table_id" {
-#   name  = "/terraform/table_id"
-#   type  = "String"
-#   value = aws_dynamodb_table.table.id
-# }
-
-# SSM PARAMETERS OR ANY VARIABLES CANT BE USED WHILST INITIALISING TERRAFORM 
 
 
 output "tfstatebucket" {
