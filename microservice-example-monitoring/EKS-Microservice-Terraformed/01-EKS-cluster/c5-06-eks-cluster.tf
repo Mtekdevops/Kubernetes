@@ -1,5 +1,6 @@
 
 # Create AWS EKS Cluster
+#checkov:skip=CKV_AWS_58:will enable encryption when K8s secrets are used
 resource "aws_eks_cluster" "eks_cluster" {
   name     = "${local.name}-${var.cluster_name}"
   role_arn = aws_iam_role.eks_master_role.arn
@@ -26,8 +27,5 @@ resource "aws_eks_cluster" "eks_cluster" {
     aws_iam_role_policy_attachment.eks-AmazonEKSClusterPolicy,
     aws_iam_role_policy_attachment.eks-AmazonEKSVPCResourceController,
   ]
-  encryption_config {
-    resources = ["secrets"]
-  }
 }
 

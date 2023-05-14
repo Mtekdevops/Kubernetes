@@ -26,7 +26,7 @@ description: Learn AWS Load Balancer Controller - Ingress SSL and SSL Redirect a
 - Go to Services -> Certificate Manager -> Create a Certificate
 - Click on **Request a Certificate**
   - Choose the type of certificate for ACM to provide: Request a public certificate
-  - Add domain names: *.yourdomain.com (in my case it is going to be `*.stacksimplify.com`)
+  - Add domain names: *.yourdomain.com (in my case it is going to be `*.mtek.site`)
   - Select a Validation Method: **DNS Validation**
   - Click on **Confirm & Request**    
 - **Validation**
@@ -74,7 +74,7 @@ kubectl get svc
 - Go to **Hosted Zones**
   - Click on **yourdomain.com** (in my case stacksimplify.com)
 - Create a **Record Set**
-  - **Name:** ssldemo101.stacksimplify.com
+  - **Name:** ssldemo101.mtek.site
   - **Alias:** yes
   - **Alias Target:** Copy our ALB DNS Name here (Sample: ssl-ingress-551932098.us-east-1.elb.amazonaws.com)
   - Click on **Create**
@@ -84,14 +84,14 @@ kubectl get svc
 - **Important Note:** Instead of `stacksimplify.com` you need to replace with your registered Route53 domain (Refer pre-requisite Step-02)
 ```t
 # HTTP URLs (Should redirect to HTTPS URL)
-http://ssldemo101.stacksimplify.com/app1/index.html
-http://ssldemo101.stacksimplify.com/app2/index.html
-http://ssldemo101.stacksimplify.com/
+http://ssldemo101.mtek.site/app1/index.html
+http://ssldemo101.mtek.site/app2/index.html
+http://ssldemo101.mtek.site/
 
 # HTTPS URLs 
-https://ssldemo101.stacksimplify.com/app1/index.html
-https://ssldemo101.stacksimplify.com/app2/index.html
-https://ssldemo101.stacksimplify.com/
+https://ssldemo101.mtek.site/app1/index.html
+https://ssldemo101.mtek.site/app2/index.html
+https://ssldemo101.mtek.site/
 ```
 
 ## Step-08: Clean Up
@@ -100,7 +100,7 @@ https://ssldemo101.stacksimplify.com/
 kubectl delete -f kube-manifests/
 
 ## Delete Route53 Record Set
-- Delete Route53 Record we created (ssldemo101.stacksimplify.com)
+- Delete Route53 Record we created (ssldemo101.mtek.site)
 ```
 
 ## Step-09: Review Terraform Manifests 
@@ -119,7 +119,7 @@ kubectl delete -f kube-manifests/
 ```t
 # Resource: ACM Certificate
 resource "aws_acm_certificate" "acm_cert" {
-  domain_name       = "*.stacksimplify.com"
+  domain_name       = "*.mtek.site"
   validation_method = "DNS"
 
   tags = {
@@ -268,7 +268,7 @@ kubectl get svc
 - Go to **Hosted Zones**
   - Click on **yourdomain.com** (in my case stacksimplify.com)
 - Create a **Record Set**
-  - **Name:** ssldemo102.stacksimplify.com
+  - **Name:** ssldemo102.mtek.site
   - **Alias:** yes
   - **Alias Target:** Copy our ALB DNS Name here (Sample: ssl-ingress-551932098.us-east-1.elb.amazonaws.com)
   - Click on **Create**
@@ -278,14 +278,14 @@ kubectl get svc
 - **Important Note:** Instead of `stacksimplify.com` you need to replace with your registered Route53 domain (Refer pre-requisite Step-02)
 ```t
 # HTTP URLs (Should redirect to HTTPS URL)
-http://ssldemo102.stacksimplify.com/app1/index.html
-http://ssldemo102.stacksimplify.com/app2/index.html
-http://ssldemo102.stacksimplify.com/
+http://ssldemo102.mtek.site/app1/index.html
+http://ssldemo102.mtek.site/app2/index.html
+http://ssldemo102.mtek.site/
 
 # HTTPS URLs 
-https://ssldemo102.stacksimplify.com/app1/index.html
-https://ssldemo102.stacksimplify.com/app2/index.html
-https://ssldemo102.stacksimplify.com/
+https://ssldemo102.mtek.site/app1/index.html
+https://ssldemo102.mtek.site/app2/index.html
+https://ssldemo102.mtek.site/
 ```
 
 
@@ -299,7 +299,7 @@ terraform apply -destroy -auto-approve
 rm -rf .terraform*
 
 ## Delete Route53 Record Set
-- Delete Route53 Record we created (ssldemo101.stacksimplify.com)
+- Delete Route53 Record we created (ssldemo101.mtek.site)
 ```
 
 ## Step-17: Don't Clean-Up LBC Controller & EKS Cluster

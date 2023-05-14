@@ -12,7 +12,7 @@ resource "aws_iam_policy" "externaldns_iam_policy" {
         "route53:ChangeResourceRecordSets"
       ],
       "Resource": [
-        "arn:aws:route53:::hostedzone/*"
+        "*"
       ]
     },
     {

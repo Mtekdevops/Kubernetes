@@ -1,3 +1,11 @@
+locals {
+  image_paths = {
+    "app1" = "/app1/index.html"
+    "app2" = "/app2/index.html"
+    "app3" = "/index.html"
+  }
+}
+
 # Kubernetes Deployment Manifest
 resource "kubernetes_deployment_v1" "myapp1" {
   metadata {

@@ -10,10 +10,6 @@ terraform {
       source = "hashicorp/kubernetes"
       version = "~> 2.19"
     }    
-    time = {
-      source = "hashicorp/time"
-      version = "~> 0.7"
-    }
   }
   # Adding Backend as S3 for Remote State Storage
   backend "s3" {
@@ -24,9 +20,4 @@ terraform {
     # For State Locking
     dynamodb_table = "tflockDDB-mtekdevops-dev"    
   }    
-}
-
-# Time Provider
-provider "time" {
-  # Configuration options
 }

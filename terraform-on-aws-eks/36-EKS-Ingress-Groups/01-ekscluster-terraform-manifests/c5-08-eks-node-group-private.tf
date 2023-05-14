@@ -10,12 +10,13 @@ resource "aws_eks_node_group" "eks_ng_private" {
   ami_type = "AL2_x86_64"  
   capacity_type = "ON_DEMAND"
   disk_size = 20
-  instance_types = ["t3.medium"]
+  instance_types = ["t3.small"]
   
   
-  remote_access {
-    ec2_ssh_key = "eks-terraform-key"    
-  }
+  # remote_access {
+  #   ec2_ssh_key = "eks-terraform-key"    
+  # }
+  ## use SSM session manager 
 
   scaling_config {
     desired_size = 1
@@ -34,8 +35,7 @@ resource "aws_eks_node_group" "eks_ng_private" {
   depends_on = [
     aws_iam_role_policy_attachment.eks-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.eks-AmazonEKS_CNI_Policy,
-    aws_iam_role_policy_attachment.eks-AmazonEC2ContainerRegistryReadOnly,
-    kubernetes_config_map_v1.aws_auth 
+    aws_iam_role_policy_attachment.eks-AmazonEC2ContainerRegistryReadOnly 
   ] 
   tags = {
     Name = "Private-Node-Group"

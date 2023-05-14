@@ -1,5 +1,6 @@
 # Kubernetes Service Manifest (Type: Load Balancer)
 resource "kubernetes_ingress_v1" "ingress" {
+  depends_on = [aws_acm_certificate_validation.acm_val]
   metadata {
     name = "ingress-externaldns-demo"
     annotations = {
@@ -26,7 +27,7 @@ resource "kubernetes_ingress_v1" "ingress" {
       # SSL Redirect Setting
       "alb.ingress.kubernetes.io/ssl-redirect" = 443
       # External DNS - For creating a Record Set in Route53
-      "external-dns.alpha.kubernetes.io/hostname" = "tfdnstest901.stacksimplify.com, tfdnstest902.stacksimplify.com"
+      "external-dns.alpha.kubernetes.io/hostname" = "tfdnstest901.mtek.site, tfdnstest902.mtek.site"
     }    
   }
   spec {

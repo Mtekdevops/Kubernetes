@@ -1,13 +1,7 @@
-# Wait 60 seconds after ACM Certificate Resource is created and changed its Certificate status to ISSUED
-resource "time_sleep" "wait_60_seconds" {
-  depends_on = [aws_acm_certificate.acm_cert]
-  create_duration = "60s"
-}
-
 # Kubernetes Service Manifest (Type: Load Balancer)
 resource "kubernetes_ingress_v1" "ingress" {
 # This resource will create (at least) 60 seconds after aws_acm_certificate.acm_cert is created 
-  depends_on = [time_sleep.wait_60_seconds]
+  depends_on = [aws_acm_certificate_validation.acm_val]
   metadata {
     name = "ingress-certdiscoverytls-demo"
     annotations = {
@@ -34,7 +28,7 @@ resource "kubernetes_ingress_v1" "ingress" {
       # SSL Redirect Setting
       "alb.ingress.kubernetes.io/ssl-redirect" = 443
     # External DNS - For creating a Record Set in Route53
-      "external-dns.alpha.kubernetes.io/hostname" = "tfcertdiscovery-tls-101.stacksimplify.com"
+      "external-dns.alpha.kubernetes.io/hostname" = "tfcertdiscovery-tls-101.mtek.site"
     }    
   }
   spec {
@@ -47,9 +41,9 @@ resource "kubernetes_ingress_v1" "ingress" {
         }
       }
     }
-    # SSL Certificate Discovery using TLS
+    # x
     tls {
-      hosts = [ "*.stacksimplify.com" ]
+      hosts = [ "*.mtek.site" ]
     }      
     rule {
       http {

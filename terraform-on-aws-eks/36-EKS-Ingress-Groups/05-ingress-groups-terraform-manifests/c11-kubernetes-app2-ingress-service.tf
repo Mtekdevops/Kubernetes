@@ -1,5 +1,6 @@
 # Kubernetes Service Manifest (Type: Load Balancer)
 resource "kubernetes_ingress_v1" "ingress_app2" {
+  depends_on = [aws_acm_certificate_validation.acm_val]
   metadata {
     name = "app2-ingress"
     annotations = {
@@ -26,7 +27,7 @@ resource "kubernetes_ingress_v1" "ingress_app2" {
       # SSL Redirect Setting
       "alb.ingress.kubernetes.io/ssl-redirect" = 443
       # External DNS - For creating a Record Set in Route53
-      "external-dns.alpha.kubernetes.io/hostname" = "tfingress-groups-demo102.stacksimplify.com"
+      "external-dns.alpha.kubernetes.io/hostname" = "tfingress-groups-demo102.mtek.site"
       # Ingress Groups
       "alb.ingress.kubernetes.io/group.name" = "myapps.web"
       "alb.ingress.kubernetes.io/group.order" = 20

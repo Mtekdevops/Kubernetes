@@ -265,7 +265,7 @@ output "externaldns_helm_metadata" {
 # Generic Variables
 aws_region = "us-east-1"
 environment = "dev"
-business_divsion = "it"
+business_divsion = "hr"
 ```
 
 
